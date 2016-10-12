@@ -1,0 +1,41 @@
+﻿@using MbmStore.Models;
+
+@{
+    ViewBag.Title = "Customers";
+}
+
+@helper RenderCustomer(Customer customer) {
+    if ("John".Equals(customer.Firstname))
+    {
+        @String.Format("{0} {1} is {2} years old.", customer.Firstname, customer.Lastname, customer.Age)<br />
+        @String.Format(" ({0})", string.Join(", ", customer.Phonenumbers))<br />
+}
+else
+{
+        @String.Format("{0} {1} ({2})", customer.Firstname, customer.Lastname, string.Join(", ", customer.Phonenumbers))
+        <br />
+}
+    @customer.Address<br />
+    @String.Format("{0} {1}", customer.Zip, customer.City)
+}
+
+<h2>Customers</h2>
+
+@foreach(Customer cust in ViewBag.Customers)
+{
+    <p>
+        @RenderCustomer(cust)
+    </p>
+}
+<hr />
+<p>
+    @RenderCustomer(ViewBag.John)
+</p>
+
+<p>
+    @RenderCustomer(ViewBag.Maz)
+</p>
+
+<p>
+    @RenderCustomer(ViewBag.Liz)
+</p>

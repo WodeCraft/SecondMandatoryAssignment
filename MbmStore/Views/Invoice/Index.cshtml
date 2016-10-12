@@ -1,0 +1,74 @@
+﻿@using MbmStore.Models;
+
+@{
+    ViewBag.Title = "Invoices";
+}
+
+<style>
+    table {
+        border: 1px solid black;
+    }
+
+    th {
+        border-bottom: 1px dashed #333333;
+        text-align: left;
+    }
+</style>
+
+@helper RenderInvoice(Invoice invoice)
+{
+string customerName = String.Format("{0} {1}", invoice.Customer.Firstname, invoice.Customer.Lastname);
+bool showCustomerName = true;
+foreach (OrderItem oi in invoice.OrderItems)
+{
+        <tr>
+            @{
+                if (showCustomerName)
+                {
+                    showCustomerName = false;
+                    <td>@customerName</td>
+                }
+                else
+                {
+                    <td>&nbsp;</td>
+                }
+            }
+            <td>@oi.Product.Title (@oi.Product.ToString().Substring(oi.Product.ToString().LastIndexOf(".") + 1))</td>
+            <td style="text-align:center;">@oi.Quantity</td>
+            <td style="text-align:right;">@String.Format("{0:0.00}", oi.Product.Price)</td>
+            <td style="text-align:right;">@String.Format("{0:0.00}", oi.TotalPrice)</td>
+        </tr>
+                }
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="3"><strong>Total</strong></td>
+                    <td style="text-align:right;"><strong>@String.Format("{0:0.00}", invoice.TotalPrice)</strong></td>
+                </tr>
+}
+
+<h2>Invoices</h2>
+
+<div class="body-content">
+    @using (Html.BeginForm())
+    {
+        @Html.DropDownList("CustomerId", "Select customer")
+        <button type="submit">Show invoices</button>
+    }
+    <br />
+    @if (ViewBag.Invoices != null)
+    {
+        <table style="width:75%; margin-left: auto; margin-right:auto;">
+            <tr>
+                <th style="width:175px;">Customer</th>
+                <th>Product</th>
+                <th style="width:50px;">Quantity</th>
+                <th style="width:75px; text-align:right;">Unit price</th>
+                <th style="width:100px; text-align:right;">Price</th>
+            </tr>
+            @foreach (Invoice invoice in ViewBag.Invoices)
+            {
+                @RenderInvoice(invoice);
+            }
+        </table>
+    }
+</div>
