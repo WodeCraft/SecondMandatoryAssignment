@@ -12,13 +12,12 @@ namespace MbmStore.Controllers
         // GET: Catalog
         public ActionResult Index()
         {
-
             // Fills the ViewBag with data from the repository
             ViewBag.Books = repo.Products.OfType<Book>().ToList();
             ViewBag.CDs = repo.Products.OfType<MusicCD>().ToList();
             ViewBag.Movies = repo.Products.OfType<Movie>().ToList();
 
-            return View();
+            return View(repo.Products);
         }
     }
 }
