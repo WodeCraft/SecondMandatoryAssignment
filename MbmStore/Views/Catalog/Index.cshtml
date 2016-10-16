@@ -20,7 +20,14 @@ td  {
             <strong>Author:</strong> @book.Author<br />
             <strong>Price:</strong> @book.Price.ToString("0.00")<br />
             <strong>Publisher:</strong> @book.Publisher @String.Format("({0})", book.Published)<br />
-            <strong>ISBN:</strong> @book.ISBN
+            <strong>ISBN:</strong> @book.ISBN<br />
+            @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                @Html.Hidden("ProductId", book.ProductId)
+                @Html.Hidden("ProductType", book.GetType().ToString())
+                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                <input type="submit" class="btn btn-success" value="Add to cart" />
+            }
         </td>
     </tr>
 }
@@ -35,6 +42,13 @@ td  {
                 <strong>Artist:</strong> @cd.Artist<br />
                 <strong>Price:</strong> @cd.Price.ToString("0.00")<br />
                 <strong>Publisher:</strong> @cd.Label (@cd.Released)<br />
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    @Html.Hidden("ProductId", cd.ProductId)
+                    @Html.Hidden("ProductType", cd.GetType())
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    <input type="submit" class="btn btn-success" value="Add to cart" />
+                }
             </td>
         </tr>
         <tr>
@@ -68,6 +82,13 @@ td  {
             <strong>Title:</strong> @movie.Title<br />
             Director: @movie.Director<br />
             Price: @String.Format("{0:0.00}", movie.Price)<br /><br />
+            @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                @Html.Hidden("ProductId", movie.ProductId)
+                @Html.Hidden("ProductType", movie.GetType())
+                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                <input type="submit" class="btn btn-success" value="Add to cart" />
+            }
         </td>
     </tr>
 }
