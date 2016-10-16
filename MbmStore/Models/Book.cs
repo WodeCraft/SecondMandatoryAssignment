@@ -102,8 +102,8 @@
         /// <param name="title"></param>
         /// <param name="price"></param>
         /// <param name="published"></param>
-        public Book(string author, string title, decimal price, short published)
-            : base(title, price)
+        public Book(int productId, string author, string title, decimal price, short published)
+            : base(productId, title, price)
         {
             this.Author = author;
             this.Published = published;

@@ -14,7 +14,16 @@ namespace MbmStore.Controllers
 
         public CartController()
         {
-            repository = new Repository();
+            repository = Repository.Instance;
+        }
+
+        public ViewResult Index(string returnUrl)
+        {
+            return View(new CartIndexViewModel
+            {
+                Cart = GetCart(),
+                ReturnUrl = returnUrl
+            });
         }
 
         public RedirectToRouteResult AddToCart(int productId, string productType, string returnUrl)
@@ -28,7 +37,7 @@ namespace MbmStore.Controllers
                 GetCart().AddItem(product, 1);
             }
 
-            return RedirectToAction("Index", new { controller = returnUrl.Substring(1) });
+            return RedirectToAction("Index", new { returnUrl = returnUrl.Substring(1) });
         }
 
         public RedirectToRouteResult RemoveFromCart(int productId, string productType, string returnUrl)
@@ -40,7 +49,7 @@ namespace MbmStore.Controllers
                 GetCart().RemoveItem(product);
             }
 
-            return RedirectToAction("Index", new { controller = returnUrl.Substring(1) });
+            return RedirectToAction("Index", new { returnUrl = returnUrl.Substring(1) });
         }
 
         private Cart GetCart()

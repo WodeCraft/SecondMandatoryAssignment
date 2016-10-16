@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace MbmStore.Models
 {
@@ -79,10 +78,9 @@ namespace MbmStore.Models
         /// </summary>
         /// <param name="title"></param>
         /// <param name="price"></param>
-        public Product(string title, decimal price)
+        public Product(int productId, string title, decimal price)
         {
-            Random rnd = new Random();
-            this.productId = rnd.Next(1000, 50000);
+            this.productId = productId;
             this.Title = title;
             this.Price = price;
         }

@@ -35,7 +35,7 @@
         /// </summary>
         /// <param name="title"></param>
         /// <param name="price"></param>
-        public Movie(string title, decimal price) : base(title, price)
+        public Movie(int productId, string title, decimal price) : base(productId, title, price)
         {
         }
 
@@ -46,7 +46,7 @@
         /// <param name="price"></param>
         /// <param name="imageUrl"></param>
         /// <param name="director"></param>
-        public Movie(string title, decimal price, string imageUrl, string director) : base(title, price)
+        public Movie(int productId, string title, decimal price, string imageUrl, string director) : base(productId, title, price)
         {
             this.ImageUrl = imageUrl;
             this.director = director;

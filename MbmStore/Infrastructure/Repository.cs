@@ -19,27 +19,44 @@ namespace MbmStore.Infrastructure
         public List<Customer> Customers = new List<Customer>();
         public List<Invoice> Invoices = new List<Invoice>();
 
+
+        private static Repository _instance;
+
+        public static Repository Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new Repository();
+                }
+                return _instance;
+            }
+        }
+
         /// <summary>
         /// Constructor that will create all the data and store it in local lists. No data is persisted.
         /// </summary>
-        public Repository()
+        private Repository()
         {
+            Random rnd = new Random();
+
             #region Products
             // Books
-            Book book = new Book("Steve Turner", "A Hard Day's Write: The Stories Behind Every Beatles Song", 150m, 2005);
+            Book book = new Book(rnd.Next(1000, 50000), "Steve Turner", "A Hard Day's Write: The Stories Behind Every Beatles Song", 150m, 2005);
             book.Publisher = "It Books";
             book.ISBN = "0060844094";
             book.ImageUrl = "AHardDaysWrite.jpg";
             Products.Add(book);
 
-            book = new Book("Stephen King", "The Shining: The Deluxe Special Edition", 199m, 2016);
+            book = new Book(rnd.Next(1000, 50000), "Stephen King", "The Shining: The Deluxe Special Edition", 199m, 2016);
             book.Publisher = "Cemetery Dance Publications";
             book.ISBN = "978-1-58767-530-0";
             book.ImageUrl = "TheShining.jpg";
             Products.Add(book);
 
             // Music CDs
-            MusicCD cd = new MusicCD("Beatles", "Abbey Road (Remastered)", 128m, 2009);
+            MusicCD cd = new MusicCD(rnd.Next(1000, 50000), "Beatles", "Abbey Road (Remastered)", 128m, 2009);
             cd.Label = "EMI";
             cd.ImageUrl = "AbbeyRoadAlbumCover.jpg";
             cd.AddTrack(new Track { Title = "Come Together", Composer = "Lennon/McCartney", Length = new TimeSpan(0, 4, 20) });
@@ -61,7 +78,7 @@ namespace MbmStore.Infrastructure
             cd.AddTrack(new Track { Title = "Her Majesty", Composer = "Lennon/McCartney", Length = new TimeSpan(0, 0, 23) });
             Products.Add(cd);
 
-            cd = new MusicCD("Fields of the Nepthilim", "Earth Inferno", 99m, 1991);
+            cd = new MusicCD(rnd.Next(1000, 50000), "Fields of the Nepthilim", "Earth Inferno", 99m, 1991);
             cd.Label = "Beggars Banquet";
             cd.ImageUrl = "Earth_Inferno_Fields_of_the_Nephilim.jpeg";
             cd.AddTrack(new Track { Title = "Intro (Dead But Dreaming)", Composer = "Fields of the Nephilim", Length = new TimeSpan(0, 16, 8) });
@@ -76,11 +93,11 @@ namespace MbmStore.Infrastructure
             Products.Add(cd);
 
             // Movies
-            Movie movie = new Movie("Jungle Book", 160.50m, "junglebook.jpg", "Jon Favreau");
+            Movie movie = new Movie(rnd.Next(1000, 50000), "Jungle Book", 160.50m, "junglebook.jpg", "Jon Favreau");
             Products.Add(movie);
-            movie = new Movie("Blade Runner", 198.95m, "bladerunner.jpg", "Ridley Scott");
+            movie = new Movie(rnd.Next(1000, 50000), "Blade Runner", 198.95m, "bladerunner.jpg", "Ridley Scott");
             Products.Add(movie);
-            movie = new Movie("Subway", 89.50m, "subway.jpg", "Luc Besson");
+            movie = new Movie(rnd.Next(1000, 50000), "Subway", 89.50m, "subway.jpg", "Luc Besson");
             Products.Add(movie);
             #endregion
 

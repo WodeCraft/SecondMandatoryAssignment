@@ -83,8 +83,8 @@ namespace MbmStore.Models
         /// <param name="title"></param>
         /// <param name="price"></param>
         /// <param name="released"></param>
-        public MusicCD(string artist, string title, decimal price, short released)
-            : base(title, price)
+        public MusicCD(int productId, string artist, string title, decimal price, short released)
+            : base(productId, title, price)
         {
 
             this.Artist = artist;

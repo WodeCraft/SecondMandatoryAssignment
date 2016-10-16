@@ -5,7 +5,7 @@ namespace MbmStore.Controllers
 {
     public class CatalogController : Controller
     {
-        private Repository repo = new Repository();
+        private Repository repo = Repository.Instance;
 
         // GET: Catalog
         public ActionResult Index()

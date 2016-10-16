@@ -26,7 +26,7 @@ namespace MbmStore.Controllers
             ViewBag.Liz = liz;
 
             // For show and tell, we also add the customers that are created in the Repository
-            Repository repo = new Repository();
+            Repository repo = Repository.Instance;
             ViewBag.Customers = repo.Customers;
 
             return View();

@@ -9,7 +9,7 @@ namespace MbmStore.Controllers
     public class InvoiceController : Controller
     {
         // Instantiate the repository
-        private Repository repo = new Repository();
+        private Repository repo = Repository.Instance;
         List<SelectListItem> customers = new List<SelectListItem>();
 
         // GET: Invoice
