@@ -98,6 +98,11 @@ td  {
 <div class="body-content">
     <table style="width:100%">
         <tr>
+            <td>
+                @Html.ActionLink("View Cart", "Index", "Cart", new { returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+        <tr>
             <td width="50%">
                 <h2>The Books</h2>
                 <table>
