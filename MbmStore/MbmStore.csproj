@@ -151,6 +151,9 @@
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Shared\org_Layout.cshtml" />
+    <Content Include="Views\Shared\ProductSummaryBook.cshtml" />
+    <Content Include="Views\Shared\ProductSummaryMusicCD.cshtml" />
+    <Content Include="Views\Shared\ProductSummaryMovie.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

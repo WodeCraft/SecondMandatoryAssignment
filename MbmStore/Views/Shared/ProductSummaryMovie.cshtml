@@ -1,0 +1,24 @@
+﻿@model MbmStore.Models.Movie
+
+<div class="row">
+    <div class="col-md-2">
+        <img src="~/Content/Images/@Model.ImageUrl" alt="@Model.Title" style="width:100px;" />
+    </div>
+
+    <div class="col-md-8">
+        <strong>Title:</strong> @Model.Title<br />
+        Director: @Model.Director<br />
+        Price: @String.Format("{0:0.00}", Model.Price)
+    </div>
+
+    <div class="col-md-2" style="border: 0px solid blue;">
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+            @Html.Label("Qty: ") @Html.DropDownList("Quantity", Enumerable.Range(1, 10).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))<br />
+            @Html.Hidden("ProductId", Model.ProductId)
+            @Html.Hidden("ProductType", Model.GetType().ToString())
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-success" value="Add to cart" />
+        }
+    </div>
+</div>
