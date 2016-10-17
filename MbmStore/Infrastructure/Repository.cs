@@ -47,18 +47,21 @@ namespace MbmStore.Infrastructure
             book.Publisher = "It Books";
             book.ISBN = "0060844094";
             book.ImageUrl = "AHardDaysWrite.jpg";
+            book.Category = "Book";
             Products.Add(book);
 
             book = new Book(rnd.Next(1000, 50000), "Stephen King", "The Shining: The Deluxe Special Edition", 199m, 2016);
             book.Publisher = "Cemetery Dance Publications";
             book.ISBN = "978-1-58767-530-0";
             book.ImageUrl = "TheShining.jpg";
+            book.Category = "Book";
             Products.Add(book);
 
             // Music CDs
             MusicCD cd = new MusicCD(rnd.Next(1000, 50000), "Beatles", "Abbey Road (Remastered)", 128m, 2009);
             cd.Label = "EMI";
             cd.ImageUrl = "AbbeyRoadAlbumCover.jpg";
+            cd.Category = "Music";
             cd.AddTrack(new Track { Title = "Come Together", Composer = "Lennon/McCartney", Length = new TimeSpan(0, 4, 20) });
             cd.AddTrack(new Track { Title = "Something", Composer = "Harrison", Length = new TimeSpan(0, 3, 3) });
             cd.AddTrack(new Track { Title = "Maxwell's Silver Hammer", Composer = "Lennon/McCartney", Length = new TimeSpan(0, 3, 27) });
@@ -81,6 +84,7 @@ namespace MbmStore.Infrastructure
             cd = new MusicCD(rnd.Next(1000, 50000), "Fields of the Nepthilim", "Earth Inferno", 99m, 1991);
             cd.Label = "Beggars Banquet";
             cd.ImageUrl = "Earth_Inferno_Fields_of_the_Nephilim.jpeg";
+            cd.Category = "Music";
             cd.AddTrack(new Track { Title = "Intro (Dead But Dreaming)", Composer = "Fields of the Nephilim", Length = new TimeSpan(0, 16, 8) });
             cd.AddTrack(new Track { Title = "Moonchild", Composer = "Fields of the Nephilim", Length = new TimeSpan(0, 5, 25) });
             cd.AddTrack(new Track { Title = "Submission", Composer = "Fields of the Nephilim", Length = new TimeSpan(0, 7, 34) });
@@ -94,10 +98,13 @@ namespace MbmStore.Infrastructure
 
             // Movies
             Movie movie = new Movie(rnd.Next(1000, 50000), "Jungle Book", 160.50m, "junglebook.jpg", "Jon Favreau");
+            movie.Category = "Movie";
             Products.Add(movie);
             movie = new Movie(rnd.Next(1000, 50000), "Blade Runner", 198.95m, "bladerunner.jpg", "Ridley Scott");
+            movie.Category = "Movie";
             Products.Add(movie);
             movie = new Movie(rnd.Next(1000, 50000), "Subway", 89.50m, "subway.jpg", "Luc Besson");
+            movie.Category = "Movie";
             Products.Add(movie);
             #endregion
 
