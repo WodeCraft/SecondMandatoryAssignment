@@ -5,12 +5,12 @@ using System.Web.Mvc;
 
 namespace MbmStore.Controllers
 {
-    public class CatalogController : Controller
+    public class CatalogueController : Controller
     {
         private Repository repo = Repository.Instance;
         public int PageSize = 4;
 
-        // GET: Catalog
+        // GET: Catalogue
         public ActionResult Index(int page = 1)
         {
 
