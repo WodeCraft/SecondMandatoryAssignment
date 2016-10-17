@@ -26,7 +26,7 @@ namespace MbmStore.Controllers
             });
         }
 
-        public RedirectToRouteResult AddToCart(Cart cart, int productId, string productType, string returnUrl)
+        public RedirectToRouteResult AddToCart(Cart cart, int productId, string productType, string returnUrl, int quantity)
         {
             // INFO Using the productId as a primary key only works as long as all products across all product types share the same ID range
             //      By adding a check for the types makes sure 2 products in the database can have the same id
@@ -34,7 +34,7 @@ namespace MbmStore.Controllers
 
             if (product != null)
             {
-                cart.AddItem(product, 1);
+                cart.AddItem(product, quantity);
             }
 
             return RedirectToAction("Index", new { controller = returnUrl.Substring(1) });
