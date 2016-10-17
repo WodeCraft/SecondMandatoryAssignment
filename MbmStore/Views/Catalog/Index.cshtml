@@ -6,15 +6,16 @@
 }
 
 <style>
-/*td  {
-    vertical-align: top;
-}*/
+td  {
+    padding-bottom: .5em; 
+    padding-left: .2em;
+}
 </style>
 
 @helper RenderBook(Book book)
 {
     <tr>
-        <td><img src="/content/images/@book.ImageUrl" width="150" alt="@book.Title" /></td>
+        <td width="150"><img src="/content/images/@book.ImageUrl" width="150" alt="@book.Title" /></td>
         <td valign="top">
             <strong>Title:</strong> @book.Title<br />
             <strong>Author:</strong> @book.Author<br />
@@ -22,14 +23,14 @@
             <strong>Publisher:</strong> @book.Publisher @String.Format("({0})", book.Published)<br />
             <strong>ISBN:</strong> @book.ISBN<br />
         </td>
-        <td valign="bottom" style="padding-bottom: 1em;">
+        <td width="100" valign="bottom">
             @using (Html.BeginForm("AddToCart", "Cart"))
             {
                 @Html.Label("Qty: ") @Html.DropDownList("Quantity", Enumerable.Range(1, 10).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))<br />
                 @Html.Hidden("ProductId", book.ProductId)
                 @Html.Hidden("ProductType", book.GetType().ToString())
                 @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                <input type="submit" class="btn btn-success" value="Add to cart" style="margin-top:.5em;" />
+                <input type="submit" class="btn btn-success" value="Add to cart" />
             }
         </td>
     </tr>
@@ -37,23 +38,23 @@
 
 @helper RenderCD(MusicCD cd)
 {
-    <table>
+    <table width="100%">
         <tr>
-            <td><img src="/content/images/@cd.ImageUrl" width="150" alt="@cd.Title" /></td>
+            <td width="150"><img src="/content/images/@cd.ImageUrl" width="150" alt="@cd.Title" /></td>
             <td valign="top">
                 <strong>Album:</strong> @cd.Title<br />
                 <strong>Artist:</strong> @cd.Artist<br />
                 <strong>Price:</strong> @cd.Price.ToString("0.00")<br />
                 <strong>Publisher:</strong> @cd.Label (@cd.Released)<br />
             </td>
-            <td valign="bottom">
+            <td width="100" valign="bottom">
                 @using (Html.BeginForm("AddToCart", "Cart"))
                 {
                     @Html.Label("Qty: ") @Html.DropDownList("Quantity", Enumerable.Range(1, 10).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))<br />
                     @Html.Hidden("ProductId", cd.ProductId)
                     @Html.Hidden("ProductType", cd.GetType())
                     @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                    <input type="submit" class="btn btn-success" value="Add to cart" style="margin-top:.5em;" />
+                    <input type="submit" class="btn btn-success" value="Add to cart" />
                 }
             </td>
         </tr>
@@ -83,20 +84,20 @@
 @helper RenderMovie(Movie movie)
 {
     <tr>
-        <td><img src="/content/images/@movie.ImageUrl" width="150" alt="@movie.Title" /></td>
+        <td width="150"><img src="/content/images/@movie.ImageUrl" width="150" alt="@movie.Title" /></td>
         <td valign="top">
             <strong>Title:</strong> @movie.Title<br />
             Director: @movie.Director<br />
             Price: @String.Format("{0:0.00}", movie.Price)
         </td>
-        <td valign="bottom" style="padding-bottom:1em;">
+        <td width="100" valign="bottom">
             @using (Html.BeginForm("AddToCart", "Cart"))
             {
                 @Html.Label("Qty: ") @Html.DropDownList("Quantity", Enumerable.Range(1, 10).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))<br />
                 @Html.Hidden("ProductId", movie.ProductId)
                 @Html.Hidden("ProductType", movie.GetType())
                 @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                <input type="submit" class="btn btn-success" value="Add to cart" style="margin-top:.5em;" />
+                <input type="submit" class="btn btn-success" value="Add to cart" />
             }
         </td>
     </tr>
@@ -112,15 +113,17 @@
             </td>
         </tr>
         <tr>
-            <td width="50%" valign="top">
+            <td>
                 <h2>The Books</h2>
-                <table>
+                <table width="100%">
                     @foreach (Book book in Model.OfType<Book>().ToList())
                     {
                         @RenderBook(book)
                     }
                 </table>
             </td>
+        </tr>
+        <tr>
             <td>
                 <h2>The Music CDs</h2>
                 @foreach (MusicCD cd in Model.OfType<MusicCD>().ToList())
@@ -130,9 +133,9 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td>
                 <h2>The Movies</h2>
-                <table>
+                <table width="100%">
                     @foreach (Movie movie in Model.OfType<Movie>().ToList())
                     {
                         @RenderMovie(movie)
