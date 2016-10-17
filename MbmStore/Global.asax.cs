@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using MbmStore.Infrastructure.Binders;
+using MbmStore.ViewModels;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -13,6 +11,9 @@ namespace MbmStore
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            // Add custom model binder
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }

@@ -17,16 +17,16 @@ namespace MbmStore.Controllers
             repository = Repository.Instance;
         }
 
-        public ViewResult Index(string returnUrl)
+        public ViewResult Index(Cart cart, string returnUrl)
         {
             return View(new CartIndexViewModel
             {
-                Cart = GetCart(),
+                Cart = cart,
                 ReturnUrl = returnUrl
             });
         }
 
-        public RedirectToRouteResult AddToCart(int productId, string productType, string returnUrl)
+        public RedirectToRouteResult AddToCart(Cart cart, int productId, string productType, string returnUrl)
         {
             // INFO Using the productId as a primary key only works as long as all products across all product types share the same ID range
             //      By adding a check for the types makes sure 2 products in the database can have the same id
@@ -34,35 +34,22 @@ namespace MbmStore.Controllers
 
             if (product != null)
             {
-                GetCart().AddItem(product, 1);
+                cart.AddItem(product, 1);
             }
 
-            return RedirectToAction("Index", new { returnUrl = returnUrl.Substring(1) });
+            return RedirectToAction("Index", new { controller = returnUrl.Substring(1) });
         }
 
-        public RedirectToRouteResult RemoveFromCart(int productId, string productType, string returnUrl)
+        public RedirectToRouteResult RemoveFromCart(Cart cart, int productId, string productType, string returnUrl)
         {
             Product product = repository.Products.FirstOrDefault(p => p.ProductId == productId);// && p.GetType().ToString() == productType);
 
             if (product != null)
             {
-                GetCart().RemoveItem(product);
+                cart.RemoveItem(product);
             }
 
-            return RedirectToAction("Index", new { returnUrl = returnUrl.Substring(1) });
-        }
-
-        private Cart GetCart()
-        {
-            Cart cart = (Cart)Session["Cart"];
-
-            if (cart == null)
-            {
-                cart = new Cart();
-                Session["Cart"] = cart;
-            }
-
-            return cart;
+            return RedirectToAction("Index", new { controller = returnUrl.Substring(1) });
         }
 
     }
