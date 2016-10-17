@@ -1,44 +1,47 @@
 ﻿@using MbmStore.Models;
-@model IEnumerable<Product>
+@using MbmStore.HtmlHelpers;
+@model MbmStore.ViewModels.ProductsListViewModel
 
 @{
     ViewBag.Title = "Catalog";
 }
 
-<h2>Products</h2>
+@using (Html.BeginForm("Index", "Cart"))
+{
+    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+    <input type="submit" class="btn btn-success" value="View Cart" />
+}
 
-<div class="body-content">
-    <div>
-        @Html.ActionLink("View Cart", "Index", "Cart", new { returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-primary" })
-    </div>
-    <br />
+@if (Model.Products.OfType<Book>().Count() > 0)
+{
+    <h2>The Books</h2>
+    foreach (Book book in Model.Products.OfType<Book>().ToList())
+    {
+        @Html.Partial("ProductSummaryBook", book);
+        <br />
+    }
+}
 
-    <div style="border: 0px solid red;">
-        <h2>The Books</h2>
-        @foreach (Book book in Model.OfType<Book>().ToList())
-        {
-            @Html.Partial("ProductSummaryBook", book);
-            <br />
-        }
-    </div>
+@if (Model.Products.OfType<MusicCD>().Count() > 0)
+{
+    <h2>The Music CDs</h2>
+    foreach (MusicCD cd in Model.Products.OfType<MusicCD>().ToList())
+    {
+        @Html.Partial("ProductSummaryMusicCD", cd)
+        <br />
+    }
+}
 
-    <div style="border: 0px solid blue;">
-        <h2>The Music CDs</h2>
-        @foreach (MusicCD cd in Model.OfType<MusicCD>().ToList())
-        {
-            @Html.Partial("ProductSummaryMusicCD", cd)
-            <br />
-        }
-    </div>
+@if (Model.Products.OfType<Movie>().Count() > 0)
+{
+    <h2>The Movies</h2>
+    foreach (Movie movie in Model.Products.OfType<Movie>().ToList())
+    {
+        @Html.Partial("ProductSummaryMovie", movie)
+        <br />
+    }
+}
 
-    <div style="border: 0px solid green;">
-        <h2>The Movies</h2>
-        @foreach (Movie movie in Model.OfType<Movie>().ToList())
-        {
-            @Html.Partial("ProductSummaryMovie", movie)
-            <br />
-        }
-    </div>
-
+<div>
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
 </div>
-

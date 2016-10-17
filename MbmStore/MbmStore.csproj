@@ -123,6 +123,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Models\Book.cs" />
@@ -137,6 +138,8 @@
     <Compile Include="ViewModels\Cart.cs" />
     <Compile Include="ViewModels\CartIndexViewModel.cs" />
     <Compile Include="ViewModels\CartLine.cs" />
+    <Compile Include="ViewModels\PagingInfo.cs" />
+    <Compile Include="ViewModels\ProductsListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

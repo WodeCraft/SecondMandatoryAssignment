@@ -1,4 +1,6 @@
 ﻿using MbmStore.Infrastructure;
+using MbmStore.ViewModels;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace MbmStore.Controllers
@@ -6,11 +8,28 @@ namespace MbmStore.Controllers
     public class CatalogController : Controller
     {
         private Repository repo = Repository.Instance;
+        public int PageSize = 4;
 
         // GET: Catalog
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            return View(repo.Products);
+
+            ProductsListViewModel model = new ProductsListViewModel
+            {
+                Products = repo.Products
+                .OrderBy(p => p.ProductId)
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize),
+
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = repo.Products.Count()
+                }
+            };
+
+            return View(model);
         }
     }
 }
