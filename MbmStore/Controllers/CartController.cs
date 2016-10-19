@@ -52,5 +52,10 @@ namespace MbmStore.Controllers
             return RedirectToAction("Index", new { controller = returnUrl.Substring(1) });
         }
 
+        public PartialViewResult Summary(Cart cart)
+        {
+            return PartialView(cart);
+        }
+
     }
 }
